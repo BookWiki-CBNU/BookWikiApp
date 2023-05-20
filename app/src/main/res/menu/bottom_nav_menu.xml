@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:title="홈"/>
+    <item
+        android:id="@+id/randomFragment"
+        android:title="통계"/>
+    <item
+        android:id="@+id/bookMarkFragment"
+        android:title="북마크"/>
+</menu>
