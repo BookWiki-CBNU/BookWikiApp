@@ -16,7 +16,7 @@
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" />
     <fragment
-        android:id="@+id/bookMarkFragment2"
+        android:id="@+id/bookMarkFragment"
         android:name="com.devjeong.bookwiki_cbnu.View.BookMarkFragment"
         android:label="fragment_book_mark"
         tools:layout="@layout/fragment_book_mark" />
