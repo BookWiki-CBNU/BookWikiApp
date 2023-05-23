@@ -19,3 +19,13 @@ data class BookCountResponse(
     val art: Int,
     val other: Int
 )
+
+data class BookDetailResponse(
+    val author: String,
+    val docId: String,
+    val docName: String,
+    val image: String,
+    val kdcLabel: String,
+    val publisher: String,
+    val summaryList: List<String>
+)
