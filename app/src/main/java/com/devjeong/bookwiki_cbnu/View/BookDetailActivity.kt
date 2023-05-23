@@ -5,11 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ExpandableListView
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringSetPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import com.devjeong.bookwiki_cbnu.Adapter.ExpandableListAdapter
 import com.devjeong.bookwiki_cbnu.Model.BookDetailResponse
 import com.devjeong.bookwiki_cbnu.Model.Bookmark
@@ -28,10 +23,6 @@ class BookDetailActivity : AppCompatActivity() {
     private var bookDetailResponse: BookDetailResponse? = null
 
     private lateinit var binding : ActivityBookDetailBinding
-
-    private val BOOKMARKS_KEY = stringSetPreferencesKey("bookmarks")
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = R.string.bookMark_data_store.toString())
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookDetailBinding.inflate(layoutInflater)
@@ -44,18 +35,6 @@ class BookDetailActivity : AppCompatActivity() {
             fetchBookDetail(docId)
         }
 
-        binding.bookMarkBtn.setOnClickListener {
-            val docName = binding.docNameTv.text.toString()
-            val docId = binding.docIdTv.text.toString()
-            val author = binding.authorTv.text.toString()
-            val publisher = binding.publisherTv.text.toString()
-            val kdcLabel = binding.kdcLabelTv.text.toString()
-
-            val bookmark = Bookmark(docName, docId, author, publisher, kdcLabel)
-            CoroutineScope(Dispatchers.IO).launch {
-                saveBookmark(bookmark)
-            }
-        }
     }
 
     private fun fetchBookDetail(docId: String) {
@@ -104,18 +83,4 @@ class BookDetailActivity : AppCompatActivity() {
             expandableListView.setAdapter(adapter)
         }
     }
-    private suspend fun saveBookmark(bookmark: Bookmark) {
-        val existingBookmarks = dataStore.data
-            .map { preferences -> preferences[BOOKMARKS_KEY]?.toMutableSet() ?: mutableSetOf() }
-            .first()
-        existingBookmarks.add(bookmark.toString())
-        withContext(Dispatchers.IO) {
-            dataStore.edit { preferences ->
-                preferences[BOOKMARKS_KEY] = existingBookmarks
-            }
-        }
-    }
-
-
-
 }
