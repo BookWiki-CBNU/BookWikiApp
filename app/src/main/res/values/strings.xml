@@ -2,4 +2,6 @@
     <string name="app_name">BookWiki_cbnu</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="bookMark_data_store">bookMark_data_store</string>
 </resources>
