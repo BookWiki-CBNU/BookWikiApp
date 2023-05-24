@@ -1,32 +1,35 @@
 package com.devjeong.bookwiki_cbnu.View
 
-import android.content.Context
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ExpandableListView
 import com.devjeong.bookwiki_cbnu.Adapter.ExpandableListAdapter
+import com.devjeong.bookwiki_cbnu.DAO.BookmarkDao
+import com.devjeong.bookwiki_cbnu.DataBase.BookmarkDatabase
 import com.devjeong.bookwiki_cbnu.Model.BookDetailResponse
 import com.devjeong.bookwiki_cbnu.Model.Bookmark
-import com.devjeong.bookwiki_cbnu.R
 import com.devjeong.bookwiki_cbnu.Retrofit.RetrofitClient
 import com.devjeong.bookwiki_cbnu.databinding.ActivityBookDetailBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 class BookDetailActivity : AppCompatActivity() {
     private lateinit var expandableListView: ExpandableListView
     private var bookDetailResponse: BookDetailResponse? = null
 
     private lateinit var binding : ActivityBookDetailBinding
+    private lateinit var bookmarkDao: BookmarkDao
+
+    private var isBookmark : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        bookmarkDao = BookmarkDatabase.getDataBase(this).bookmarkDao()
 
         expandableListView = binding.expandableListView
 
@@ -35,8 +38,16 @@ class BookDetailActivity : AppCompatActivity() {
             fetchBookDetail(docId)
         }
 
-    }
+        // 북마크 버튼 클릭 리스너 등록
+        binding.bookMarkBtn.setOnClickListener {
+            val docId = binding.docIdTv.text.toString()
+            val docName = binding.docNameTv.text.toString()
+            val kdcLabel = binding.kdcLabelTv.text.toString()
+            val publisher = binding.publisherTv.text.toString()
 
+            saveBookmark(docId, docName, kdcLabel, publisher)
+        }
+    }
     private fun fetchBookDetail(docId: String) {
         val apiService = RetrofitClient.bookApiService
         CoroutineScope(Dispatchers.IO).launch {
@@ -81,6 +92,14 @@ class BookDetailActivity : AppCompatActivity() {
 
             val adapter = ExpandableListAdapter(this, groupList, childMap)
             expandableListView.setAdapter(adapter)
+        }
+    }
+    private fun saveBookmark(docId: String, docName:String, kdcLabel:String, publisher:String) {
+        val bookmark = Bookmark(docId, docName, kdcLabel, publisher)
+        CoroutineScope(Dispatchers.IO).launch {
+            bookmarkDao.insertBookmark(bookmark)
+            Log.d("Bookmark", "Bookmark added : $docId")
+            finish()
         }
     }
 }

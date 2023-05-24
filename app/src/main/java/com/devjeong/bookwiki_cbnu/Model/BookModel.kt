@@ -1,12 +1,15 @@
 package com.devjeong.bookwiki_cbnu.Model
 
 import android.nfc.tech.TagTechnology
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 data class Book(
-    var doc_id : String,
-    var doc_name : String,
-    var kdc_label : String,
-    var publisher : String
+    val doc_id: String,
+    val doc_name: String,
+    val kdc_label: String,
+    val publisher: String
 )
 
 data class BookResponse(
@@ -29,21 +32,10 @@ data class BookDetailResponse(
     val summaryList: List<String>
 )
 
+@Entity(tableName = "bookmarks")
 data class Bookmark(
-    val docName: String,
-    val docId: String,
-    val author: String,
-    val publisher: String,
-    val kdcLabel: String
-) {
-    override fun toString(): String {
-        return "$docName|$docId|$author|$publisher|$kdcLabel"
-    }
-
-    companion object {
-        fun fromString(string: String): Bookmark {
-            val parts = string.split("|")
-            return Bookmark(parts[0], parts[1], parts[2], parts[3], parts[4])
-        }
-    }
-}
+    @PrimaryKey val docId : String,
+    @ColumnInfo(name = "doc_name") val doc_name: String,
+    @ColumnInfo(name = "kdc_label") val kdc_label: String,
+    @ColumnInfo(name = "publisher") val publisher: String
+)
