@@ -15,6 +15,11 @@
 
         <EditText
             android:id="@+id/searchEt"
+            android:hint="책 이름 검색"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeActionLabel="검색"
             android:layout_width="match_parent"
             android:layout_height="60dp"/>
 
