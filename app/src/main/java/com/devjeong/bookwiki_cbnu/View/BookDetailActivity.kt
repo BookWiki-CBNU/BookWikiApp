@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ExpandableListView
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.devjeong.bookwiki_cbnu.Adapter.ExpandableListAdapter
 import com.devjeong.bookwiki_cbnu.DAO.BookmarkDao
 import com.devjeong.bookwiki_cbnu.DataBase.BookmarkDatabase
@@ -22,8 +24,6 @@ class BookDetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityBookDetailBinding
     private lateinit var bookmarkDao: BookmarkDao
-
-    private var isBookmark : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookDetailBinding.inflate(layoutInflater)
@@ -65,6 +65,10 @@ class BookDetailActivity : AppCompatActivity() {
                             binding.authorTv.text = it.author
                             binding.publisherTv.text = it.publisher
                             binding.kdcLabelTv.text = it.kdcLabel
+                            Glide
+                                .with(this@BookDetailActivity)
+                                .load(it.image)
+                                .into(binding.docImage)
 
                             setupExpandableListView()
                         }
