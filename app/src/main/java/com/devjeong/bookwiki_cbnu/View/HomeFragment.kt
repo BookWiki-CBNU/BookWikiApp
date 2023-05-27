@@ -8,6 +8,11 @@ import com.devjeong.bookwiki_cbnu.databinding.FragmentHomeBinding
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.title = "책무위키"
+    }
+
     override fun onStart() {
         super.onStart()
 

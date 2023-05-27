@@ -8,44 +8,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:gravity="center">
 
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/techBtn"
+                android:text="기술과학"
+                android:textSize="27sp"
+                android:textColor="@color/black"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/text_round_box"
+                android:backgroundTint="#CFFFF9"/>
 
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/artBtn"
+                android:text="예술과학"
+                android:textSize="27sp"
+                android:textColor="@color/black"
                 android:layout_width="180dp"
-                android:layout_height="180dp"/>
+                android:layout_height="180dp"
+                android:background="@drawable/text_round_box"
+                android:backgroundTint="@color/art"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="20dp"
             android:gravity="center">
 
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/socialBtn"
+                android:text="사회과학"
+                android:textSize="27sp"
+                android:textColor="@color/black"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/text_round_box"
+                android:backgroundTint="@color/social"/>
 
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/otherBtn"
+                android:text="기타"
+                android:textSize="27sp"
+                android:textColor="@color/black"
                 android:layout_width="180dp"
-                android:layout_height="180dp"/>
+                android:layout_height="180dp"
+                android:background="@drawable/text_round_box"
+                android:backgroundTint="@color/other"/>
         </LinearLayout>
 
 

@@ -29,6 +29,8 @@ class BookDetailActivity : AppCompatActivity() {
         binding = ActivityBookDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "열람페이지"
+
         bookmarkDao = BookmarkDatabase.getDataBase(this).bookmarkDao()
 
         expandableListView = binding.expandableListView

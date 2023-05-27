@@ -25,6 +25,8 @@ class BookListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_list)
 
+        supportActionBar?.title = "리스트"
+
         val category = intent.getStringExtra("category")
         Log.d("category", category.toString())
 

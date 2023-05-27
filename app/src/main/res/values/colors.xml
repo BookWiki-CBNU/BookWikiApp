@@ -8,8 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="bottom_nav_background">#FEDBD0</color>
+    <color name="bottom_nav_background">#AFAFAF</color>
     <color name="bottom_nav_item">#8C706D</color>
     <color name="bottom_nav_selected_item">#220006</color>
     <color name="bottom_bg_color">#FDF8F4</color>
+
+    <color name="technology">#CFFFF9</color>
+    <color name="art">#FFFBD4</color>
+    <color name="social">#CAD9FF</color>
+    <color name="other">#FFDEDE</color>
+    <color name="background">#8EE5E5</color>
 </resources>

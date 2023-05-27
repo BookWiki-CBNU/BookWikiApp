@@ -22,8 +22,8 @@ class BookMarkFragment : BaseFragment<FragmentBookMarkBinding>(FragmentBookMarkB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bookmarkViewModel = ViewModelProvider(this)[BookmarkViewModel::class.java]
+        activity?.title = "북마크"
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.BookmarkRecyclerView

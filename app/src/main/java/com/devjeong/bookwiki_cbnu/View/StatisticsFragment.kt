@@ -25,6 +25,11 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>(FragmentStati
     private lateinit var pieChart : PieChart
     private lateinit var recyclerView: RecyclerView
     private lateinit var bookAdapter: BookListRecyclerAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.title = "통계페이지"
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

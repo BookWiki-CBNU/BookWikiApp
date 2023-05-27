@@ -6,14 +6,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:weightSum="100"
-    android:padding="5dp">
+    android:background="@drawable/item_round_box"
+    android:padding="5dp"
+    android:layout_marginBottom="15dp">
 
     <LinearLayout
         android:id="@+id/item_book"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:background="#F2F8EB"
+        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <LinearLayout

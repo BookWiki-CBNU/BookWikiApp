@@ -13,21 +13,26 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/countPieChart"
             android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="400dp"
+            android:background="@color/background"/>
 
         <TextView
             android:text="추천책"
-            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="10dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/randomRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
 
     </LinearLayout>
 
