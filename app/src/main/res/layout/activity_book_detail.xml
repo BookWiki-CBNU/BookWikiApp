@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.BookDetailActivity"
-    android:background="@color/background">
+    android:orientation="vertical">
 
+    <View
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -27,66 +36,108 @@
                 android:src="@mipmap/ic_launcher"
                 android:scaleType="centerCrop"
                 android:layout_width="150dp"
-                android:layout_height="190dp"
+                android:layout_height="200dp"
                 android:layout_marginEnd="5dp"/>
 
             <LinearLayout
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/docNameTv"
-                    android:text="제목 : 흥부와 토끼"
-                    android:textColor="@color/black"
+                    android:text="제목 : 로딩중입니다..."
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="19sp"
+                    android:lines="3"/>
 
                 <LinearLayout
+                    android:layout_marginTop="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:text="출판사 : "
+                        android:textColor="@color/black"
+                        android:background="@drawable/item_text_detail_round_box"
+                        android:padding="3dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"/>
+
+                    <TextView
+                        android:id="@+id/publisherTv"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/docIdTv"
-                    android:text="Doc ID : gsegrsgreerse"
-                    android:textColor="@color/black"
+                <LinearLayout
+                    android:layout_marginTop="6dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/authorTv"
-                    android:text="저자 : 정승규"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="저자 : "
+                        android:textColor="@color/black"
+                        android:background="@drawable/item_text_detail_round_box"
+                        android:padding="3dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"/>
 
-                <TextView
-                    android:id="@+id/publisherTv"
-                    android:text="출판사 : 문화재청"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/authorTv"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/kdcLabelTv"
-                    android:text="Kdc Label : 문화재"
-                    android:textColor="@color/black"
+                <LinearLayout
+                    android:layout_marginTop="6dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:text="카테고리 : "
+                        android:textColor="@color/black"
+                        android:background="@drawable/item_text_detail_round_box"
+                        android:padding="3dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"/>
+
+                    <TextView
+                        android:id="@+id/kdcLabelTv"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/DetailBookChap"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:text="상세정보"
@@ -96,6 +147,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="7dp"/>
+
+            <TextView
+                android:id="@+id/docIdTv"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginStart="65dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/DetailBookChap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <ExpandableListView
                 android:id="@+id/expandableListView"
@@ -112,4 +183,6 @@
         android:layout_width="42dp"
         android:layout_height="45dp"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

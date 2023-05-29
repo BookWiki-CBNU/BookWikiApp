@@ -2,11 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
+        android:icon="@drawable/home_icon"
         android:title="홈"/>
     <item
         android:id="@+id/statisticsFragment"
+        android:icon="@drawable/statistics_icon"
         android:title="통계"/>
     <item
         android:id="@+id/bookMarkFragment"
+        android:icon="@drawable/bookmark_icon"
         android:title="북마크"/>
 </menu>

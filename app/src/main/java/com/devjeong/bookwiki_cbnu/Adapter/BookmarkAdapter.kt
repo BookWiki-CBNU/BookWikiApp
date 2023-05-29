@@ -38,6 +38,7 @@ class BookmarkAdapter(private val itemClickListener: OnItemClickListener)  : Lis
             binding.tvBookTitle.text = bookmark.doc_name
             binding.tvBookLabel.text = bookmark.kdc_label
             binding.tvBookPublisher.text = bookmark.publisher
+            binding.tvBookDocId.text = bookmark.docId
         }
     }
 

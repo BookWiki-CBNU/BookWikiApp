@@ -25,6 +25,8 @@
             android:background="@drawable/item_text_round_box"
             android:padding="1dp"
             android:lines="1"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:text="Title" />
 
         <TextView
@@ -35,9 +37,10 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="kdc label"
-            android:paddingStart="2dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:paddingEnd="2dp"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tv_book_publisher"
@@ -46,6 +49,7 @@
             android:text="제작자"
             android:textSize="18sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:layout_marginStart="10dp"/>
 
@@ -56,6 +60,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="18sp"
             android:text="Content" />
     </LinearLayout>

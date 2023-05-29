@@ -28,7 +28,7 @@ data class BookDetailResponse(
     val docName: String,
     val image: String,
     val kdcLabel: String,
-    val publisher: String,
+    val publisher: String? = "알수없음.",
     val summaryList: List<String>
 )
 
