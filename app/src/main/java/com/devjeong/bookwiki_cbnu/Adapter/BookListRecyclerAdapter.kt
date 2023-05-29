@@ -51,10 +51,12 @@ class BookListRecyclerAdapter(var books: List<Book>)
                     val bookTitle : TextView = itemView.findViewById(R.id.tv_book_title)
                     val bookLabel : TextView = itemView.findViewById(R.id.tv_book_label)
                     val bookPublisher : TextView = itemView.findViewById(R.id.tv_book_publisher)
+                    val bookDocId : TextView = itemView.findViewById(R.id.tv_book_docId)
 
                     bookTitle.text = book.doc_name
                     bookLabel.text = book.kdc_label
                     bookPublisher.text = book.publisher
+                    bookDocId.text = book.doc_id
                 }
             }
         }
