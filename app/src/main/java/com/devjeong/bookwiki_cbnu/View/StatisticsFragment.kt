@@ -1,6 +1,5 @@
 package com.devjeong.bookwiki_cbnu.View
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,15 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devjeong.bookwiki_cbnu.Adapter.BookListRecyclerAdapter
+import com.devjeong.bookwiki_cbnu.Adapter.GradeBookListRecyclerAdapter
 import com.devjeong.bookwiki_cbnu.BaseFragment
-import com.devjeong.bookwiki_cbnu.Model.BookYearCategory
-import com.devjeong.bookwiki_cbnu.R
-import com.devjeong.bookwiki_cbnu.Retrofit.BookApiService
-import com.devjeong.bookwiki_cbnu.Retrofit.BookCategory
 import com.devjeong.bookwiki_cbnu.Retrofit.RetrofitClient
 import com.devjeong.bookwiki_cbnu.databinding.FragmentStatisticsBinding
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.PercentFormatter
@@ -28,7 +23,7 @@ import kotlinx.coroutines.*
 class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>(FragmentStatisticsBinding::inflate) {
     private lateinit var pieChart : PieChart
     private lateinit var recyclerView: RecyclerView
-    private lateinit var bookAdapter: BookListRecyclerAdapter
+    private lateinit var bookAdapter: GradeBookListRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +39,11 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>(FragmentStati
         fetchChartData()
         fetchYearData()
 
-        recyclerView = binding.randomRecyclerView
+        recyclerView = binding.bestBookRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
-        bookAdapter = BookListRecyclerAdapter(emptyList()) // 빈 리스트로 초기화
+        bookAdapter = GradeBookListRecyclerAdapter() // 빈 리스트로 초기화
         recyclerView.adapter = bookAdapter
-        fetchRandomData()
+        fetchBestBookData()
 
         return view
     }
@@ -130,11 +125,12 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>(FragmentStati
 
     }
 
-    private fun fetchRandomData() {
+    private fun fetchBestBookData() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val response = RetrofitClient.bookApiService.getRandom()
-                val books = response.list
+                val response = RetrofitClient.bookApiService.getTopGrade()
+
+                val books = response
 
                 withContext(Dispatchers.Main) {
                     bookAdapter.updateData(books)

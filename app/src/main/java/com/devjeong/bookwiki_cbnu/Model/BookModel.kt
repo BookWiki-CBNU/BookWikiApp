@@ -47,6 +47,14 @@ data class BookYearCategory(
     val year: String
 )
 
+data class TopGrade(
+    val doc_name: String,
+    val grade: Int,
+    val publisher: String,
+    val _id: String,
+    val kdc_label: String
+)
+
 @Entity(tableName = "bookmarks")
 data class Bookmark(
     @PrimaryKey val docId : String,

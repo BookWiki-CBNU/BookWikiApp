@@ -1,9 +1,6 @@
 package com.devjeong.bookwiki_cbnu.Retrofit
 
-import com.devjeong.bookwiki_cbnu.Model.BookCountResponse
-import com.devjeong.bookwiki_cbnu.Model.BookDetailResponse
-import com.devjeong.bookwiki_cbnu.Model.BookResponse
-import com.devjeong.bookwiki_cbnu.Model.BookYearCategory
+import com.devjeong.bookwiki_cbnu.Model.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -31,4 +28,7 @@ interface BookApiService {
 
     @GET("book/read/count/year")
     suspend fun getBookCountByYear(): List<BookYearCategory>
+
+    @GET("book/read/topGrade")
+    suspend fun getTopGrade() : List<TopGrade>
 }
