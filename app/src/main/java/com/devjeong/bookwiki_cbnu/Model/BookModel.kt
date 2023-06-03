@@ -4,6 +4,8 @@ import android.nfc.tech.TagTechnology
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import java.lang.reflect.Constructor
 
 data class Book(
     val doc_id: String,
@@ -30,6 +32,19 @@ data class BookDetailResponse(
     val kdcLabel: String,
     val publisher: String? = "알수없음.",
     val summaryList: List<String>
+)
+
+data class BookYearCategory(
+    @SerializedName("300")
+    val code300: Int,
+    @SerializedName("500")
+    val code500: Int,
+    @SerializedName("600")
+    val code600: Int,
+    val other: Int,
+    val total: Int,
+    @SerializedName("_id")
+    val year: String
 )
 
 @Entity(tableName = "bookmarks")

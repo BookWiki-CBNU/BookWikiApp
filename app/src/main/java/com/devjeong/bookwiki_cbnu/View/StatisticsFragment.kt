@@ -1,5 +1,6 @@
 package com.devjeong.bookwiki_cbnu.View
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,15 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devjeong.bookwiki_cbnu.Adapter.BookListRecyclerAdapter
 import com.devjeong.bookwiki_cbnu.BaseFragment
+import com.devjeong.bookwiki_cbnu.Model.BookYearCategory
 import com.devjeong.bookwiki_cbnu.R
+import com.devjeong.bookwiki_cbnu.Retrofit.BookApiService
 import com.devjeong.bookwiki_cbnu.Retrofit.BookCategory
 import com.devjeong.bookwiki_cbnu.Retrofit.RetrofitClient
 import com.devjeong.bookwiki_cbnu.databinding.FragmentStatisticsBinding
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.*
 
@@ -38,6 +42,7 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>(FragmentStati
         pieChart = binding.countPieChart
 
         fetchChartData()
+        fetchYearData()
 
         recyclerView = binding.randomRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
@@ -46,6 +51,83 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>(FragmentStati
         fetchRandomData()
 
         return view
+    }
+
+    private fun fetchYearData() {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val groupedBarEntries = ArrayList<BarEntry>()
+                val years = ArrayList<String>()
+                val bookCounts = RetrofitClient.bookApiService.getBookCountByYear()
+
+                withContext(Dispatchers.Main) {
+                    for ((index, bookCount) in bookCounts.withIndex()) {
+                        val barEntry = BarEntry(
+                            index.toFloat(),
+                            floatArrayOf(
+                                bookCount.code300.toFloat(),
+                                bookCount.code500.toFloat(),
+                                bookCount.code600.toFloat(),
+                                bookCount.other.toFloat()
+                            )
+                        )
+                        groupedBarEntries.add(barEntry)
+                        years.add(bookCount.year)
+                    }
+
+                    val barColors = intArrayOf(*ColorTemplate.JOYFUL_COLORS, *ColorTemplate.JOYFUL_COLORS, *ColorTemplate.JOYFUL_COLORS, *ColorTemplate.JOYFUL_COLORS)
+                    val labels = arrayOf("사회과학", "기술과학", "예술과학", "그 외")
+
+                    val dataSets = ArrayList<IBarDataSet>()
+
+                    for (i in labels.indices) {
+                        val values = ArrayList<BarEntry>()
+
+                        for (j in groupedBarEntries.indices) {
+                            val barEntry = groupedBarEntries[j]
+                            val stackedValue = barEntry.yVals[i]
+                            values.add(BarEntry(barEntry.x, floatArrayOf(stackedValue)))
+                        }
+
+                        val dataSet = BarDataSet(values, labels[i])
+                        dataSet.color = barColors[i]
+                        dataSets.add(dataSet)
+                    }
+
+                    val data = BarData(dataSets as List<IBarDataSet>)
+
+                    data.barWidth = 0.2f
+                    data.groupBars(-0.5f, 0.3f, 0.04f)
+
+                    val chart = binding.countBarChart
+
+                    /*val xAxis = chart.xAxis
+                    xAxis.spaceMin = 0.5f // 그룹 간의 최소 공간 설정
+                    xAxis.spaceMax = 3f // 그룹 간의 최대 공간 설정
+                    xAxis.valueFormatter = IndexAxisValueFormatter(years)
+                    xAxis.position = XAxis.XAxisPosition.BOTTOM
+                    xAxis.labelCount = years.size
+                    xAxis.setDrawGridLines(false)*/
+
+                    chart.data = data
+                    chart.setDrawGridBackground(false)
+                    chart.setFitBars(true)
+                    chart.description.isEnabled = false
+                    chart.legend.isEnabled = true
+                    chart.xAxis.valueFormatter = IndexAxisValueFormatter(years)
+                    chart.xAxis.setCenterAxisLabels(false)
+                    chart.xAxis.setDrawGridLines(false)
+                    chart.axisLeft.axisMinimum = 0f
+                    chart.axisRight.isEnabled = false
+                    chart.setTouchEnabled(false)
+                    chart.animateY(1000)
+                    chart.invalidate()
+                }
+            } catch (e: Exception) {
+                Log.e("StatisticsFragment", "Error: ${e.message}")
+            }
+        }
+
     }
 
     private fun fetchRandomData() {

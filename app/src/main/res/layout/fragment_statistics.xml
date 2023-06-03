@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".View.StatisticsFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:background="@color/background"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/countBarChart"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"/>
 
         <TextView
             android:text="추천책"
@@ -35,5 +45,7 @@
             android:layout_marginEnd="10dp"/>
 
     </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>
